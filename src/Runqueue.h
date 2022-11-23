@@ -3,18 +3,15 @@
 #include <vector>
 #include <stack>
 
-struct RQ{
-    vector<stack> rq;    
-};
-
-
 class Runqueue{
 private:
-
+    vector<stack> rq;
 public:
     Runqueue();
     ~Runqueue();
-    
+    int getT(int i);
+    void pushT(int i);
+    bool isEmpty();
 };
 
 #endif
