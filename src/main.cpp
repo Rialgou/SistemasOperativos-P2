@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 /*
 n procesos hebras tipo T, duración sleep(random[a,b])
 m hebras tipo E que procesaran las hebras tipo T
@@ -19,3 +17,11 @@ Hebras tipo G que según condición o tiempo crean nuevas hebras tipo T y se agr
 
 Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+}
