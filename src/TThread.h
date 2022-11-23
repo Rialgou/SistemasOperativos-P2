@@ -1,4 +1,4 @@
-#ifdef _TThread_H_
+#ifndef _TThread_H_
 #define _TThread_H_
 class TThread {
 private:

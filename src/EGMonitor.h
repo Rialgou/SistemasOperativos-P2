@@ -1,4 +1,4 @@
-#ifdef _EGMonitor_H_
+#ifndef _EGMonitor_H_
 #define _EGMonitor_H_
 #include <pthread.h>
 
