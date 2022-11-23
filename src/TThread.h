@@ -5,7 +5,7 @@ private:
     int t;
     int priority;
 public:
-    TThread();
+    TThread(int t,int priority);
     ~TThread();
     void setTime(int t);
     void setPriority(int priority);
