@@ -10,7 +10,7 @@ public:
     Runqueue();
     ~Runqueue();
     int getT(int i);
-    void pushT(int i);
+    void pushT(int i,int v);
     bool isEmpty();
     void printQueue();
 };

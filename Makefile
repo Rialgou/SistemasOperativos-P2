@@ -1,4 +1,4 @@
-CC = gcc
+CC = g++
 TARGET = Proyecto2
 FILES := $(wildcard src/*.c)
 HEADERS := $(wildcard src/*.h)
