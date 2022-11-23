@@ -1,11 +1,11 @@
 #ifndef _Runqueue_H_
 #define _Runqueue_H_
 #include <vector>
-#include <stack>
+#include <queue>
 
 class Runqueue{
 private:
-    std::vector<std::stack<int>> rq;
+    std::vector<std::queue<int>> rq;
 public:
     Runqueue();
     ~Runqueue();

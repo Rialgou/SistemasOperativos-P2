@@ -5,10 +5,13 @@
 using namespace std;
 
 Runqueue::Runqueue(){
-
+    rq.resize(10);
+}
+Runqueue::~Runqueue(){
+    rq.clear();
 }
 int Runqueue::getT(int i){
-    int aux = rq[i].top();
+    int aux = rq[i].front();
     rq[i].pop();
     return aux;
 }
@@ -25,7 +28,7 @@ void Runqueue::printQueue(){
     for(int i=0;i<rq.size();i++){
         cout <<"cola"<<i;
         while(!rq[i].empty()){
-            cout<<" -> "<<rq[i].top();
+            cout<<" -> "<<rq[i].front();
             rq[i].pop();
         }
         cout<<endl;
