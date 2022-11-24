@@ -19,14 +19,16 @@ Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 */
 
 #include <bits/stdc++.h>
-#include "Runqueue.h"
+#include "Planner.h"
 using namespace std;
 
 int main(){
 int n,m;
 cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
 cin >>n>>m;
-Runqueue *active = new Runqueue();
+Planner *p = new Planner(n,0,10);
+p->printActive();
+/*Runqueue *active = new Runqueue();
 Runqueue *expired = new Runqueue();
 TThread aux(0,0,10);
 active->pushT(aux.getPriority(),aux);
@@ -36,5 +38,5 @@ active->pushT(aux.getPriority(),aux);
 aux.setPriority(1);
 aux.setTime(3);
 active->pushT(aux.getPriority(),aux);
-active->printQueue();
+active->printQueue();*/
 }

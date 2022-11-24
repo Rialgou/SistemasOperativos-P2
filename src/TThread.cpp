@@ -15,8 +15,11 @@ TThread::TThread(int priority,int a,int b){
 TThread::~TThread(){
     
 }
-void TThread::setTime(int dif){
-    this->t =dif; 
+void TThread::setTime(int t){
+    this->t =t; 
+}
+void TThread::newTime(int dif){
+    this->t -=dif; 
 }
 void TThread::setPriority(int priority){
     this->priority = priority;
