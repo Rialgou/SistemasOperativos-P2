@@ -1,15 +1,22 @@
 #include <iostream>
 #include <vector>
+#include <random>
 #include "TThread.h"
 
 using namespace std;
 
-TThread::TThread(int t,int priority){
-    this->t = t;
+TThread::TThread(int priority,int a,int b){
+    srand(time(NULL));
+    this->a =a;
+    this->b =b;
+    this->t = rand() % b + a;
     this->priority = priority;
 }
-void TThread::setTime(int t){
-    this->t = t;
+TThread::~TThread(){
+    
+}
+void TThread::newTime(int dif){
+    this->t -=dif; 
 }
 void TThread::setPriority(int priority){
     this->priority = priority;

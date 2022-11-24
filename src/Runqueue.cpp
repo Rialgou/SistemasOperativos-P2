@@ -10,12 +10,12 @@ Runqueue::Runqueue(){
 Runqueue::~Runqueue(){
     rq.clear();
 }
-int Runqueue::getT(int i){
-    int aux = rq[i].front();
+TThread Runqueue::getT(int i){
+    TThread aux = rq[i].front();
     rq[i].pop();
     return aux;
 }
-void Runqueue::pushT(int i, int v){
+void Runqueue::pushT(int i, TThread v){
     rq[i].push(v);
 }
 bool Runqueue::isEmpty(){
@@ -25,12 +25,12 @@ bool Runqueue::isEmpty(){
     return true;
 }
 void Runqueue::printQueue(){
-    for(int i=0;i<rq.size();i++){
+    /*for(int i=0;i<rq.size();i++){
         cout <<"cola"<<i;
         while(!rq[i].empty()){
             cout<<" -> "<<rq[i].front();
             rq[i].pop();
         }
         cout<<endl;
-    }
+    }*/
 }

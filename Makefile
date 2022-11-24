@@ -1,6 +1,6 @@
 CC = g++
 TARGET = Proyecto2
-FILES := $(wildcard src/*.c)
+FILES := $(wildcard src/*.cpp)
 HEADERS := $(wildcard src/*.h)
 
 $(TARGET): $(FILES) $(HEADERS) | bin

@@ -23,14 +23,7 @@ Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 using namespace std;
 
 int main(){
-Runqueue *rq = new Runqueue();
-rq->pushT(0,4);
-rq->pushT(0,5);
-rq->pushT(1,6);
-rq->pushT(3,4);
-rq->pushT(3,2);
-rq->pushT(6,9);
-rq->getT(0);
-rq->printQueue();
+Runqueue *active = new Runqueue();
+Runqueue *expired = new Runqueue();
 
 }
