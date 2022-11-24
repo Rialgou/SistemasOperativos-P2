@@ -25,12 +25,12 @@ bool Runqueue::isEmpty(){
     return true;
 }
 void Runqueue::printQueue(){
-    /*for(int i=0;i<rq.size();i++){
-        cout <<"cola"<<i;
+    for(int i=0;i<rq.size();i++){
+        cout <<"tiempos cola"<<i;
         while(!rq[i].empty()){
-            cout<<" -> "<<rq[i].front();
+            cout<<" -> "<<rq[i].front().getTime();
             rq[i].pop();
         }
         cout<<endl;
-    }*/
+    }
 }

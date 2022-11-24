@@ -20,12 +20,6 @@ private:
 public:
     EGMonitor();
     ~EGMonitor();
-    void pickT();
-    void finishedPick();
-    void leftT();
-    void finishedLeft();
-    void createT();
-    void finishCreate();
 };
 
 #endif

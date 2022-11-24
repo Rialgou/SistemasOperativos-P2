@@ -8,8 +8,10 @@ private:
 public:
     TThread(int t,int a,int b);
     ~TThread();
-    void newTime(int dif);
+    void setTime(int dif);
     void setPriority(int priority);
+    int getTime();
+    int getPriority();
 };
 
 #endif
