@@ -8,13 +8,24 @@ private:
     pthread_mutex_t mutex;
     pthread_cond_t takeT;
     pthread_cond_t placeT;
+    pthread_cond_t createT;
     int activeE;
     int waitingE;
+    int activeG;
+    int waitingG;
+    bool takeShouldWait();
+    bool leftShouldWait();
+    bool createShouldWait();
 
 public:
     EGMonitor();
     ~EGMonitor();
-    
+    void pickT();
+    void finishedPick();
+    void leftT();
+    void finishedLeft();
+    void createT();
+    void finishCreate();
 };
 
 #endif
