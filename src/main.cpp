@@ -23,6 +23,9 @@ Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 using namespace std;
 
 int main(){
+int n,m;
+cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
+cin >>n>>m;
 Runqueue *active = new Runqueue();
 Runqueue *expired = new Runqueue();
 TThread aux(0,0,10);

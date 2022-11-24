@@ -1,6 +1,5 @@
 #ifndef _Runqueue_H_
 #define _Runqueue_H_
-#include <vector>
 #include <queue>
 #include "TThread.h"
 class Runqueue{
