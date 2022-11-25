@@ -27,6 +27,10 @@ int n,m;
 cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
 cin >>n>>m;
 Planner *p = new Planner(n,0,10);
+if(!p->activeEmpty()){
+    TThread aux = p->getActiveProccess();
+    cout<<"proceso extraido, prioridad: "<< aux.getPriority() <<"  tiempo de ejecución: "<<  aux.getTime()<<endl;
+}
 p->printActive();
 /*Runqueue *active = new Runqueue();
 Runqueue *expired = new Runqueue();

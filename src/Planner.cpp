@@ -24,6 +24,15 @@ Planner::Planner(int n,int a,int b){
 Planner::~Planner(){
 
 }
+TThread Planner::getActiveProccess(){
+    return active.getT();
+}
+bool Planner::activeEmpty(){
+    return active.isEmpty();
+}
+bool Planner::expiredEmpty(){
+    return expired.isEmpty();
+}
 void Planner::printActive(){
     //imprime la runqueue activa
     active.printQueue();

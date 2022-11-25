@@ -12,11 +12,13 @@ Runqueue::~Runqueue(){
     //se vacia la runqueue
     rq.clear();
 }
-TThread Runqueue::getT(int i){
-    //se guarda el elemento que esta al frente de la cola, se saca de la cola y se retorna 
-    TThread aux = rq[i].front();
-    rq[i].pop();
-    return aux;
+TThread Runqueue::getT(){
+    //se guarda el elemento que esta al frente de la cola, se saca de la cola y se retorna     
+    for(int i=0;i<rq.size();i++){
+        TThread aux = rq[i].front();
+        rq[i].pop();
+        return aux;
+    }
 }
 void Runqueue::pushT(int i, TThread v){
     //se ingresa el proceso

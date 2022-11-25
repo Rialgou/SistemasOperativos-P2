@@ -8,7 +8,7 @@ private:
 public:
     Runqueue();
     ~Runqueue();
-    TThread getT(int i);
+    TThread getT();
     void pushT(int i,TThread v);
     bool isEmpty();
     void printQueue();
