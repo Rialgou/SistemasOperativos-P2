@@ -1,2 +1,6 @@
-/.vscode
-/bin
+.vscode/
+bin/
+bin/Proyecto2
+src/EGMonitor.h.gch
+src/Runqueue.h.gch
+src/TThread.h.gch

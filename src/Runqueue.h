@@ -1,17 +1,20 @@
 #ifndef _Runqueue_H_
 #define _Runqueue_H_
-#include <queue>
+
 #include "TThread.h"
-class Runqueue{
+#include <queue>
+class Runqueue {
 private:
-    std::vector<std::queue<TThread>> rq;
+  std::vector<std::queue<TThread>> rq;
+
 public:
-    Runqueue();
-    ~Runqueue();
-    TThread getT();
-    void pushT(int i,TThread v);
-    bool isEmpty();
-    void printQueue();
+  Runqueue();
+  ~Runqueue();
+  TThread getT(int priority);
+  void pushT(int i, TThread v);
+  bool isEmpty();
+  bool isPEmpy(int p);
+  void printQueue();
 };
 
 #endif
