@@ -1,4 +1,3 @@
-#include <pthread.h>
 #include <stdio.h>
 #include <iostream>
 #include <unistd.h>
@@ -28,13 +27,10 @@ Planner::~Planner(){
 
 }
 void Planner::execProccess(){
-    pthread_mutex_lock(&activeM);
-    TThread aux(0,0);
-    if(!activeEmpty()){
-        aux = getActiveProccess();
-    }
-    pthread_mutex_unlock(&activeM);
-    cout<<"proceso extraido, prioridad: "<<aux.getPriority()<<", tiempo de ejecución: "<<aux.getTime()<<endl;
+    activeM.lock();
+    TThread aux(0,4);
+    active.pushT(0,aux);
+    activeM.unlock();
 }
 TThread Planner::getActiveProccess(){
     return active.getT();

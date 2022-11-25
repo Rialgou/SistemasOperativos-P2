@@ -4,7 +4,7 @@ FILES := $(wildcard src/*.cpp)
 HEADERS := $(wildcard src/*.h)
 
 $(TARGET): $(FILES) $(HEADERS) | bin
-	$(CC) $^ -o bin/$@
+	$(CC) $^ -pthread -o bin/$@
 
 bin:
 	mkdir bin

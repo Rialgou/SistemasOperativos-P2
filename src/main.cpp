@@ -20,25 +20,23 @@ Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 
 #include <bits/stdc++.h>
 #include "Planner.h"
+#include <thread>
 using namespace std;
 
-int main(){
-int n,m;
-cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
-cin >>n>>m;
-Planner *p = new Planner(n,0,10);
-for(int i=0;i<m;i++){
-    
+Planner *p;
+
+void saludar(){
+    p->execProccess();
 }
-/*Runqueue *active = new Runqueue();
-Runqueue *expired = new Runqueue();
-TThread aux(0,0,10);
-active->pushT(aux.getPriority(),aux);
-aux.setPriority(0);
-aux.setTime(5);
-active->pushT(aux.getPriority(),aux);
-aux.setPriority(1);
-aux.setTime(3);
-active->pushT(aux.getPriority(),aux);
-active->printQueue();*/
+
+int main(){
+    int n,m;
+    cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
+    cin >>n>>m;
+    p = new Planner(n,0,10);
+    for(int i=0;i<m;i++){
+        thread t(saludar);
+        t.join();
+    }
+    p->printActive();
 }
