@@ -14,6 +14,7 @@ int createTime(int a,int b);
 public:
     Planner(int n,int a,int b);
     ~Planner();
+    void execProccess();
     TThread getActiveProccess();
     bool activeEmpty();
     bool expiredEmpty();

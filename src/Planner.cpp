@@ -1,9 +1,12 @@
 #include <pthread.h>
 #include <stdio.h>
+#include <iostream>
 #include <unistd.h>
 #include <time.h>
 #include <stdlib.h>
 #include "Planner.h"
+
+using namespace std;
 
 Planner::Planner(int n,int a,int b){
     //se inicializa el planner pasandole la cantidad de procesos (n) y los intervalos 
@@ -23,6 +26,15 @@ Planner::Planner(int n,int a,int b){
 }
 Planner::~Planner(){
 
+}
+void Planner::execProccess(){
+    pthread_mutex_lock(&activeM);
+    TThread aux(0,0);
+    if(!activeEmpty()){
+        aux = getActiveProccess();
+    }
+    pthread_mutex_unlock(&activeM);
+    cout<<"proceso extraido, prioridad: "<<aux.getPriority()<<", tiempo de ejecución: "<<aux.getTime()<<endl;
 }
 TThread Planner::getActiveProccess(){
     return active.getT();
