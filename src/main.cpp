@@ -25,17 +25,20 @@ using namespace std;
 Planner *p;
 
 void start(){
-    p->execProccess();
+  p->execProccess();
 }
 
 int main(){
-    int n,m;
-    cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
-    cin >>n>>m;
-    p = new Planner(n,0,300);
-    for(int i=0;i<m;i++){
-        thread t(start);
-        t.join();
-    }
-    p->printActive();
+  int n,m;
+  cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
+  cin >>n>>m;
+  thread threadArr[m];
+  p = new Planner(n,m,0,2000);
+  for(int i=0;i<m;i++){
+    threadArr[i] = thread(start);
+  }
+  for(int i=0;i<m;i++){
+    threadArr[i].join();
+  }
+  p->printActive();
 }

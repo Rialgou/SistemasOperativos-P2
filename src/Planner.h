@@ -10,10 +10,13 @@ private:
   Runqueue expired;
   std::mutex activeM;
   std::mutex expiredM;
+  std::mutex eCount;
+  int eThreads;
+  int eTCount;
   int createTime(int a, int b);
 
 public:
-  Planner(int n, int a, int b);
+  Planner(int n,int m, int a, int b);
   ~Planner();
   void execProccess();
   void printActive();
