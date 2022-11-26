@@ -23,7 +23,13 @@ void TThread::setTime(int t) {
 }
 void TThread::setPriority(int priority) {
   // sete prioridad
-  this->priority = priority;
+  if(priority >=9){
+    this->priority =9;
+  }
+  else{
+    this->priority = priority;
+  }
+  
 }
 void TThread::setId(int id){
   this->id = id;

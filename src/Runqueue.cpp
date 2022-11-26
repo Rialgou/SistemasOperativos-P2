@@ -21,7 +21,13 @@ TThread Runqueue::getT(int priority) {
 }
 void Runqueue::pushT(int i, TThread v) {
   // se ingresa el proceso
-  rq[i].push(v);
+  if(i >=9){
+    rq[9].push(v);
+  }
+  else{
+    rq[i].push(v);
+  }
+  
 }
 bool Runqueue::isEmpty() {
   // verifica en cada nivel si queda algún proceso
