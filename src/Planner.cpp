@@ -20,7 +20,7 @@ Planner::Planner(int n, int a, int b) {
   TThread aux(a, b);
   for (int i = 0; i < n; i++) {
     active.pushT(aux.getPriority(), aux);
-    priority = random() % 10;
+    priority = 0;
     aux.setPriority(priority);
     t = createTime(a, b);
     aux.setTime(t);
@@ -31,7 +31,7 @@ void Planner::execProccess() {
   // obtener proceso
   int p = 0;
   do {
-    if (active.isPEmpy(p)) {
+    if (active.isPEmpty(p)) {
       p++;
       continue;
     }
@@ -55,11 +55,6 @@ void Planner::execProccess() {
   expired.printQueue();
   expiredM.unlock();
 }
-TThread Planner::getActiveProccess(int priority) {
-  return active.getT(priority);
-}
-bool Planner::activeEmpty() { return active.isEmpty(); }
-bool Planner::expiredEmpty() { return expired.isEmpty(); }
 void Planner::printActive() {
   // imprime la runqueue activa
   // active.printQueue();

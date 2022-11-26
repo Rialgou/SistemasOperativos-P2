@@ -13,7 +13,7 @@ public:
   TThread getT(int priority);
   void pushT(int i, TThread v);
   bool isEmpty();
-  bool isPEmpy(int p);
+  bool isPEmpty(int p);
   void printQueue();
 };
 

@@ -11,7 +11,6 @@ public:
   TThread(int a, int b);
   ~TThread();
   void setTime(int t);
-  void newTime(int dif);
   void setPriority(int priority);
   int getTime();
   int getPriority();

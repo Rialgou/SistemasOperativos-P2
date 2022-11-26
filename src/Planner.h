@@ -16,9 +16,6 @@ public:
   Planner(int n, int a, int b);
   ~Planner();
   void execProccess();
-  TThread getActiveProccess(int priority);
-  bool activeEmpty();
-  bool expiredEmpty();
   void printActive();
 };
 

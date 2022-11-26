@@ -32,7 +32,7 @@ bool Runqueue::isEmpty() {
   return true;
 }
 
-bool Runqueue::isPEmpy(int p) { return rq.at(p).empty(); }
+bool Runqueue::isPEmpty(int p) { return rq.at(p).empty(); }
 void Runqueue::printQueue() {
   // imprime la runqueue
   for (int i = 0; i < rq.size(); i++) {
