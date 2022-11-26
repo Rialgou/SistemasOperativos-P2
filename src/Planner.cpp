@@ -72,7 +72,7 @@ void Planner::execProccess() {
     // las hebras esperan hasta que todas terminen de pasar por la runqueue activa
   
     while(1){
-      cout<<"esperando las demás hebras: "<<m<<endl;
+      cout<<"esperando las demás hebras: "<<eTCount<<endl;
       if(eTCount == eThreads) break;  
     }
     // se re inicializa la prioridad a 0
@@ -111,7 +111,7 @@ void Planner::execProccess() {
     eCount.unlock();
     // los procesos esperan hasta que todos hayan pasado por la runqueue expirada
     while(1){
-      cout<<"esperando las demás hebras: "<<m<<endl;
+      cout<<"esperando las demás hebras: "<<eTCount<<endl;
       if(eTCount==0) break;
     }
   }
