@@ -31,79 +31,79 @@ Planner::Planner(int n,int m, int a, int b) {
 }
 Planner::~Planner() {}
 void Planner::execProccess() {
-  // se inicializa prioridad en 0 
-  // ejecutar hasta que se quiera parar el proceso
+  // se ejecuta el proceso 
   while(1){
-    if(expired.isEmpty() && active.isEmpty()){
-      cout<<"ambas runqueues estan vacias"<<endl;
-    }
+    // se toma el mutex de la runqueue expirada y activa y se comprueba si estan vacias
+    // se inicializa la prioridad con 0 
     int p = 0;
     // obtener proceso de la runqueue activa
-    if(expired.isEmpty()){
-      cout<<"runqueue expirada esta vacia"<<endl;
+      //se busca un nivel donde se encuentre algun proceso
       do {
+        activeM.lock();
         if (active.isPEmpty(p)) {
           p++;
+          activeM.unlock();
           continue;
         }
-        activeM.lock();
+        //se obtiene ese proceso 
         TThread aux = active.getT(p);
         activeM.unlock();
-        // ejecutar programa por un quantum
+        // se ejecuta el proceso por un quantum
         this_thread::sleep_for(chrono::milliseconds(200));
         // disminuir tiempo de ejecucion
-        aux.setTime(aux.getTime() - 200);
-        // si tiempo de ejecución nuevo < 0 se elimina el proceso 
-        if(aux.getTime()>0){
+        // si tiempo de ejecución nuevo es mayor que 0 se baja la prioridad y se ingresa a la runqueue 
+        // expirada 
+        if(aux.getTime() - 200 > 0){
+          aux.setTime(aux.getTime() - 200);
           aux.setPriority(p+1);
           expiredM.lock();
-          cout<<"trabajando en proceso n°"<<aux.getId()<<" de active queue, prioridad: "<<aux.getPriority()-1 <<endl;
+          cout<<"trabajando en proceso n°"<<aux.getId()<<" de active queue, nueva prioridad: "<<aux.getPriority() <<endl;
           expired.pushT(p+1, aux);
           expiredM.unlock();
         }
-        // poner dentro de runqueue expired
       } while (p < 10);
-    }
-    // comprobar que todas las hebras pasaron por la runqueue activa
+    // se suma al contador de hebras que pasaron por la runqueue activa
     eCount.lock();
     eTCount++;
     cout<<"m++: "<<eTCount<<endl;
     eCount.unlock();
+    // las hebras esperan hasta que todas terminen de pasar por la runqueue activa
     while(1){
       if(eTCount == eThreads) break;  
     }
+    // se re inicializa la prioridad a 0
     p=0;
     // obtener proceso de la runqueue expirada
-    if(active.isEmpty()){
-      cout<<"runqueue activa esta vacia"<<endl;
+      // se busca en los niveles de la runqueue expirada hasta encontrar un proceso, por orden de prioridad
       do {
+        expiredM.lock();
         if (expired.isPEmpty(p)) {
           p++;
+          expiredM.unlock();
           continue;
         }
-        expiredM.lock();
+        // se saca el proceso de la runqueue
         TThread aux = expired.getT(p);
         expiredM.unlock();
-        // ejecutar programa por un quantum
+        // se ejecutra el proceso por un quantum
         this_thread::sleep_for(chrono::milliseconds(200));
         // disminuir tiempo de ejecucion
-        aux.setTime(aux.getTime() - 200);
-        // si tiempo de ejecución nuevo < 0 se elimina el proceso 
-        if(aux.getTime()>0){
+        // si tiempo de ejecución nuevo > 0 se le baja la prioridad al proceso y se ingresa en la runqueue activa 
+        if(aux.getTime()- 200 > 0){
+          aux.setTime(aux.getTime() - 200);
           aux.setPriority(p+1);
           activeM.lock();
-          cout<<"trabajando en proceso n°"<<aux.getId()<<" de expired queue, prioridad: "<<aux.getPriority()-1 <<endl;
+          cout<<"trabajando en proceso n°"<<aux.getId()<<" de expired queue, prioridad nueva: "<<aux.getPriority() <<endl;
           active.pushT(p+1, aux);
           activeM.unlock();
         }
-        // poner dentro de runqueue expired
       } while (p < 10);
-    }
-    // comprobar que todas las hebras pasaron por la runqueue expirada
+    // se tiene registro de que procesos pasaron por la runqueue expirada
     eCount.lock();
     eTCount--;
     cout<<"m--: "<<eTCount<<endl;
     eCount.unlock();
+    // los procesos esperan hasta que todos hayan pasado por la runqueue expirada
     while(1){
       if(eTCount==0) break;
     }
