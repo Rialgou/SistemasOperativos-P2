@@ -17,10 +17,11 @@ Planner::Planner(int n, int a, int b) {
   srand(time(NULL));
   int t;
   int priority;
-  TThread aux(a, b);
+  TThread aux(a, b,0);
   for (int i = 0; i < n; i++) {
     active.pushT(aux.getPriority(), aux);
     priority = 0;
+    aux.setId(i+1);
     aux.setPriority(priority);
     t = createTime(a, b);
     aux.setTime(t);
@@ -39,18 +40,21 @@ void Planner::execProccess() {
     activeM.lock();
     TThread aux = active.getT(p);
     activeM.unlock();
-
-    // dejarle eejcutar programa un quantum
+    // ejecutar programa por un quantum
     this_thread::sleep_for(chrono::milliseconds(200));
     // disminuir tiempo de ejecucion
     aux.setTime(aux.getTime() - 200);
+    // si tiempo de ejecución nuevo < 0 se elimina el proceso 
+    if(aux.getTime()>0){
+      aux.setPriority(p+1);
+      cout<<"trabajando en proceso n°"<<aux.getId()<<endl;
+      expiredM.lock();
+      expired.pushT(p+1, aux);
+      expiredM.unlock();
+    }
     // poner dentro de runqueue expired
-    expiredM.lock();
-    expired.pushT(p, aux);
-    expiredM.unlock();
-
   } while (p < 10);
-  cout << "print expired" << endl;
+  cout<<"print expired"<<endl;
   expiredM.lock();
   expired.printQueue();
   expiredM.unlock();

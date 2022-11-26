@@ -32,13 +32,16 @@ bool Runqueue::isEmpty() {
   return true;
 }
 
-bool Runqueue::isPEmpty(int p) { return rq.at(p).empty(); }
+bool Runqueue::isPEmpty(int p) {
+  // verifica si el nivel de prioridad actual tiene algun proceso 
+  return rq.at(p).empty(); 
+}
 void Runqueue::printQueue() {
   // imprime la runqueue
   for (int i = 0; i < rq.size(); i++) {
     cout << "tiempos cola" << i;
     while (!rq[i].empty()) {
-      cout << " -> " << rq[i].front().getTime();
+      cout << " -> " << rq[i].front().getId();
       rq[i].pop();
     }
     cout << endl;

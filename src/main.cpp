@@ -17,15 +17,14 @@ Hebras tipo G que según condición o tiempo crean nuevas hebras tipo T y se agr
 
 Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 */
-
-#include <bits/stdc++.h>
+#include <iostream>
 #include "Planner.h"
 #include <thread>
 using namespace std;
 
 Planner *p;
 
-void saludar(){
+void start(){
     p->execProccess();
 }
 
@@ -33,9 +32,9 @@ int main(){
     int n,m;
     cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
     cin >>n>>m;
-    p = new Planner(n,0,10);
+    p = new Planner(n,0,300);
     for(int i=0;i<m;i++){
-        thread t(saludar);
+        thread t(start);
         t.join();
     }
     p->printActive();
