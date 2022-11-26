@@ -29,7 +29,7 @@ Planner::Planner(int n, int a, int b) {
 }
 Planner::~Planner() {}
 void Planner::execProccess() {
-  // obtener proceso
+  // obtener proceso de la runqueue activa
   int p = 0;
   do {
     if (active.isPEmpty(p)) {
@@ -54,10 +54,31 @@ void Planner::execProccess() {
     }
     // poner dentro de runqueue expired
   } while (p < 10);
+  // obtener proceso de la runqueue expirada
+  p = 0;
+  do {
+    if (expired.isPEmpty(p)) {
+      p++;
+      continue;
+    }
+
+    expiredM.lock();
+    TThread aux = expired.getT(p);
+    expiredM.unlock();
+    // si tiempo de ejecución nuevo < 0 se elimina el proceso 
+    activeM.lock();
+    active.pushT(p, aux);
+    activeM.unlock();
+    // poner dentro de runqueue expired
+  } while (p < 10);
   cout<<"print expired"<<endl;
   expiredM.lock();
   expired.printQueue();
   expiredM.unlock();
+  cout<<"print active"<<endl;
+  activeM.lock();
+  active.printQueue();
+  activeM.unlock();
 }
 void Planner::printActive() {
   // imprime la runqueue activa
