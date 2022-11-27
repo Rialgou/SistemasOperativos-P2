@@ -21,9 +21,7 @@ Pregunta: ¿que pasa cuando la prioridad ya es 9 y se debe bajar la prioridad?
 #include "Planner.h"
 #include <thread>
 using namespace std;
-
 Planner *p;
-
 void start(int m){
   p->execProccess(m);
 }

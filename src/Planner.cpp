@@ -57,7 +57,7 @@ void Planner::execProccess(int m) {
         aux.setTime(aux.getTime() - 200);
         aux.setPriority(p+1);
         expiredM.lock();
-        cout<<"trabajando en proceso n°"<<aux.getId()<<" de active queue, nueva prioridad: "<<aux.getPriority() <<endl;
+        cout<<"trabajando en proceso n°"<<aux.getId()<<" de active queue, nueva prioridad: "<<aux.getPriority()<<" tiempo restante: "<<aux.getTime() <<endl;
         expired.pushT(p+1, aux);
         expiredM.unlock();
       }else {
@@ -103,7 +103,7 @@ void Planner::execProccess(int m) {
         aux.setTime(aux.getTime() - 200);
         aux.setPriority(p+1);
         activeM.lock();
-        cout<<"trabajando en proceso n°"<<aux.getId()<<" de expired queue, prioridad nueva: "<<aux.getPriority() <<endl;
+        cout<<"trabajando en proceso n°"<<aux.getId()<<" de expired queue, prioridad nueva: "<<aux.getPriority()<<" tiempo restante: "<<aux.getTime() <<endl;
         active.pushT(p+1, aux);
         activeM.unlock();
       }else{
