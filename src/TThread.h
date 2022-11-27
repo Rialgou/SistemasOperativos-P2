@@ -3,7 +3,6 @@
 
 class TThread {
 private:
-  int a, b;
   int t;
   int priority;
   int id;

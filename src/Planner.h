@@ -19,7 +19,7 @@ public:
   Planner(int n, int a, int b);
   ~Planner();
   void execProccess(int m);
-  void genProccess(int m);
+  void genProccess(int n);
 };
 
 #endif

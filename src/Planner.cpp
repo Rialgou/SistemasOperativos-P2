@@ -131,11 +131,11 @@ int Planner::createTime(int a, int b) {
   // crea un nuevo tiempo respetando los intervalos dados
   return rand() % b + a;
 }
-void Planner::genProccess(int m){
+void Planner::genProccess(int n){
   // proceso que utilizara la hebra G para crear procesos cada 5 segundos de manera
   // se creara una cantidad de procesos aleatorios entre 1 y 10 y se pushean a la runqueue activa
   int cantProccess;
-  int cont =m;
+  int cont =n;
   while(1){
     cantProccess = random() % 10 + 1;
     this_thread::sleep_for(chrono::seconds(5));

@@ -43,7 +43,7 @@ int main(){
   thread threadArr[m+1];
   p = new Planner(n,a,b);
   for(int i=0;i<m+1;i++){
-    if(i == m) threadArr[i] = thread(genProccess,m); 
+    if(i == m) threadArr[i] = thread(genProccess,n); 
     else threadArr[i] = thread(start, m);
     
   }
