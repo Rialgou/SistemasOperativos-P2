@@ -27,6 +27,9 @@ Planner *p;
 void start(int m){
   p->execProccess(m);
 }
+void genProccess(int m){
+  p->genProccess(m);
+}
 
 int main(){
   srand(time(NULL));
@@ -37,13 +40,14 @@ int main(){
   cin >>m;
   cout <<"ingresa un entero a y un entero b para definir el rango de la duración de los procesos"<<endl;
   cin >>a>>b;
-  thread threadArr[m];
+  thread threadArr[m+1];
   p = new Planner(n,a,b);
-  for(int i=0;i<m;i++){
-    threadArr[i] = thread(start, m);
+  for(int i=0;i<m+1;i++){
+    if(i == m) threadArr[i] = thread(genProccess,m); 
+    else threadArr[i] = thread(start, m);
+    
   }
-  for(int i=0;i<m;i++){
+  for(int i=0;i<m+1;i++){
     threadArr[i].join();
   }
-  p->printActive();
 }

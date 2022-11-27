@@ -62,14 +62,14 @@ void Planner::execProccess(int m) {
         expiredM.unlock();
       }else {
         expiredM.lock();
-        cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! "<<endl;
+        cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! sacado de active queue "<<endl;
         expiredM.unlock();
       }
     } while (p < 10);
     // se suma al contador de hebras que pasaron por la runqueue activa
     eCount.lock();
     eTCount ++;
-    cout<<"m++: "<<eTCount<<endl;
+    //cout<<"m++: "<<eTCount<<endl;
     eCount.unlock();
     // las hebras esperan hasta que todas terminen de pasar por la runqueue activa
   
@@ -107,14 +107,14 @@ void Planner::execProccess(int m) {
         activeM.unlock();
       }else{
         expiredM.lock();
-        cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! "<<endl;
+        cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! sacado de expired queue "<<endl;
         expiredM.unlock();      
       }
     } while (p < 10);
     // se tiene registro de que procesos pasaron por la runqueue expirada
     eCount.lock();
     eTCount--;
-    cout<<"m--: "<<eTCount<<endl;
+    //cout<<"m--: "<<eTCount<<endl;
     eCount.unlock();
     // los procesos esperan hasta que todos hayan pasado por la runqueue expirada
     while(1){
@@ -134,6 +134,8 @@ int Planner::createTime(int a, int b) {
   return rand() % b + a;
 }
 void Planner::genProccess(int m){
+  // proceso que utilizara la hebra G para crear procesos cada 5 segundos de manera
+  // se creara una cantidad de procesos aleatorios entre 1 y 10 y se pushean a la runqueue activa
   int cantProccess;
   int cont =m;
   while(1){
