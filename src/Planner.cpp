@@ -16,6 +16,8 @@ Planner::Planner(int n, int a, int b) {
   // procesos se crean n TThreads
   int t;
   int priority;
+  this->a=a;
+  this->b=b;
   this -> eTCount = 0;
   TThread aux(a, b,0);
   for (int i = 0; i < n; i++) {
@@ -130,4 +132,19 @@ void Planner::printActive() {
 int Planner::createTime(int a, int b) {
   // crea un nuevo tiempo respetando los intervalos dados
   return rand() % b + a;
+}
+void Planner::genProccess(int m){
+  int cantProccess;
+  int cont =m;
+  while(1){
+    cantProccess = random() % 10 + 1;
+    this_thread::sleep_for(chrono::seconds(5));
+    activeM.lock();
+    for(int i=0;i<cantProccess;i++){
+        cont++;
+        TThread aux(a,b,cont);
+        active.pushT(aux.getPriority(),aux);
+    }
+    activeM.unlock(); 
+  }
 }

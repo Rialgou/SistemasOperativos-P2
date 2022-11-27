@@ -11,7 +11,7 @@ private:
   std::mutex activeM;
   std::mutex expiredM;
   std::mutex eCount;
-  std::mutex ePrint;
+  int a,b;
   int eTCount;
   int createTime(int a, int b);
 
@@ -20,6 +20,7 @@ public:
   ~Planner();
   void execProccess(int m);
   void printActive();
+  void genProccess(int m);
 };
 
 #endif
