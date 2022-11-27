@@ -19,7 +19,6 @@ public:
   Planner(int n, int a, int b);
   ~Planner();
   void execProccess(int m);
-  void printActive();
   void genProccess(int m);
 };
 

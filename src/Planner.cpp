@@ -49,11 +49,11 @@ void Planner::execProccess(int m) {
       TThread aux = active.getT(p);
       activeM.unlock();
       // se ejecuta el proceso por un quantum
-      this_thread::sleep_for(chrono::milliseconds(200));
       // disminuir tiempo de ejecucion
       // si tiempo de ejecución nuevo es mayor que 0 se baja la prioridad y se ingresa a la runqueue 
       // expirada 
       if(aux.getTime() - 200 > 0){
+        this_thread::sleep_for(chrono::milliseconds(200));
         aux.setTime(aux.getTime() - 200);
         aux.setPriority(p+1);
         expiredM.lock();
@@ -61,6 +61,7 @@ void Planner::execProccess(int m) {
         expired.pushT(p+1, aux);
         expiredM.unlock();
       }else {
+        this_thread::sleep_for(chrono::milliseconds(aux.getTime()));
         expiredM.lock();
         cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! sacado de active queue "<<endl;
         expiredM.unlock();
@@ -94,11 +95,11 @@ void Planner::execProccess(int m) {
       // se saca el proceso de la runqueue
       TThread aux = expired.getT(p);
       expiredM.unlock();
-      // se ejecutra el proceso por un quantum
-      this_thread::sleep_for(chrono::milliseconds(200));
+      // se ejecuta el proceso por un quantum
       // disminuir tiempo de ejecucion
       // si tiempo de ejecución nuevo > 0 se le baja la prioridad al proceso y se ingresa en la runqueue activa 
       if(aux.getTime()- 200 > 0){
+        this_thread::sleep_for(chrono::milliseconds(200));
         aux.setTime(aux.getTime() - 200);
         aux.setPriority(p+1);
         activeM.lock();
@@ -106,6 +107,7 @@ void Planner::execProccess(int m) {
         active.pushT(p+1, aux);
         activeM.unlock();
       }else{
+        this_thread::sleep_for(chrono::milliseconds(aux.getTime()));
         expiredM.lock();
         cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! sacado de expired queue "<<endl;
         expiredM.unlock();      
@@ -125,10 +127,6 @@ void Planner::execProccess(int m) {
     }
   }
 }
-void Planner::printActive() {
-  // imprime la runqueue activa
-  // active.printQueue();
-}
 int Planner::createTime(int a, int b) {
   // crea un nuevo tiempo respetando los intervalos dados
   return rand() % b + a;
@@ -144,6 +142,7 @@ void Planner::genProccess(int m){
     activeM.lock();
     for(int i=0;i<cantProccess;i++){
         cont++;
+        cout<<"creando proceso n°"<<cont<<endl;
         TThread aux(a,b,cont);
         active.pushT(aux.getPriority(),aux);
     }
