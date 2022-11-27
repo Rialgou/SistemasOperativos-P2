@@ -11,11 +11,12 @@ TThread::TThread(int a, int b,int id) {
   this->a = a;
   this->b = b;
   this->t = a + rand() % ((b+1)- a);
-  this->priority = rand() %10;
+  this->priority = rand() % 10;
   this->id = id;
   
 }
-TThread::~TThread() {}
+TThread::~TThread() {
+}
 void TThread::setTime(int t) {
   // cambia el tiempo
   this->t = t;

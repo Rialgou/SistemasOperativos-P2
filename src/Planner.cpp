@@ -20,14 +20,15 @@ Planner::Planner(int n, int a, int b) {
   TThread aux(a, b,0);
   for (int i = 0; i < n; i++) {
     active.pushT(aux.getPriority(), aux);
-    priority = 0;
+    priority = random() % 10 ;
     aux.setId(i+1);
     aux.setPriority(priority);
     t = createTime(a, b);
     aux.setTime(t);
   }
 }
-Planner::~Planner() {}
+Planner::~Planner() {
+}
 void Planner::execProccess(int m) {
   // se ejecuta el proceso 
   while(1){
@@ -58,7 +59,9 @@ void Planner::execProccess(int m) {
         expired.pushT(p+1, aux);
         expiredM.unlock();
       }else {
+        expiredM.lock();
         cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! "<<endl;
+        expiredM.unlock();
       }
     } while (p < 10);
     // se suma al contador de hebras que pasaron por la runqueue activa
@@ -101,7 +104,9 @@ void Planner::execProccess(int m) {
         active.pushT(p+1, aux);
         activeM.unlock();
       }else{
+        expiredM.lock();
         cout<<"proceso n°"<<aux.getId()<<" se ha completado con exito! "<<endl;
+        expiredM.unlock();      
       }
     } while (p < 10);
     // se tiene registro de que procesos pasaron por la runqueue expirada

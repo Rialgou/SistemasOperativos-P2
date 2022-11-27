@@ -30,11 +30,15 @@ void start(int m){
 
 int main(){
   srand(time(NULL));
-  int n,m;
-  cout <<"ingrese la cantidad de procesos y la cantidad de hebras especializadas: "<<endl;
-  cin >>n>>m;
+  int n,m,a,b;
+  cout <<"ingresa la cantidad de procesos:"<<endl;
+  cin >>n;
+  cout <<"ingresa la cantidad de hebras especializadas"<<endl;
+  cin >>m;
+  cout <<"ingresa un entero a y un entero b para definir el rango de la duración de los procesos"<<endl;
+  cin >>a>>b;
   thread threadArr[m];
-  p = new Planner(n,0,2000);
+  p = new Planner(n,a,b);
   for(int i=0;i<m;i++){
     threadArr[i] = thread(start, m);
   }
