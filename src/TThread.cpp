@@ -8,11 +8,10 @@ using namespace std;
 TThread::TThread(int a, int b,int id) {
   // se inicializa el proceso con su prioridad y tiempo de ejecución
   // se le pasan los intervalos a,b
-  srand(time(NULL));
   this->a = a;
   this->b = b;
   this->t = a + rand() % ((b+1)- a);
-  this->priority = 0;
+  this->priority = rand() %10;
   this->id = id;
   
 }

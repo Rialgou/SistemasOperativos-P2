@@ -10,14 +10,12 @@
 
 using namespace std;
 
-Planner::Planner(int n,int m, int a, int b) {
+Planner::Planner(int n, int a, int b) {
   // se inicializa el planner pasandole la cantidad de procesos (n) y los
   // intervalos de tiempo en los que se encontrara el tiempo de ejecución de los
   // procesos se crean n TThreads
-  srand(time(NULL));
   int t;
   int priority;
-  this -> eThreads = m;
   this -> eTCount = 0;
   TThread aux(a, b,0);
   for (int i = 0; i < n; i++) {
@@ -30,14 +28,13 @@ Planner::Planner(int n,int m, int a, int b) {
   }
 }
 Planner::~Planner() {}
-void Planner::execProccess() {
+void Planner::execProccess(int m) {
   // se ejecuta el proceso 
   while(1){
-    // se toma el mutex de la runqueue expirada y activa y se comprueba si estan vacias
     // se inicializa la prioridad con 0 
     int p = 0;
     // obtener proceso de la runqueue activa
-      //se busca un nivel donde se encuentre algun proceso
+      // se busca un nivel donde se encuentre algun proceso
     do {
       activeM.lock();
       if (active.isPEmpty(p)) {
@@ -66,13 +63,17 @@ void Planner::execProccess() {
     } while (p < 10);
     // se suma al contador de hebras que pasaron por la runqueue activa
     eCount.lock();
-    eTCount++;
+    eTCount ++;
     cout<<"m++: "<<eTCount<<endl;
     eCount.unlock();
     // las hebras esperan hasta que todas terminen de pasar por la runqueue activa
   
     while(1){
-      if(eTCount == eThreads) break;  
+      
+      if(eTCount == m){
+        this_thread::sleep_for(chrono::milliseconds(200));
+        break; 
+      }  
     }
     // se re inicializa la prioridad a 0
     p=0;
@@ -110,7 +111,10 @@ void Planner::execProccess() {
     eCount.unlock();
     // los procesos esperan hasta que todos hayan pasado por la runqueue expirada
     while(1){
-      if(eTCount==0) break;
+      if(eTCount == 0){
+        this_thread::sleep_for(chrono::milliseconds(200));
+        break;
+      } 
     }
   }
 }
