@@ -7,3 +7,5 @@ una vez ejecutado el programa
 luego se ejecutara el programa entregando información sobre que proceso se esta trabajando,
 en que runqueue, cuanto tiempo falta para terminar un proceso, prioridad nueva de proceso y 
 creación de un nuevo proceso.
+
+OBSERVACIÓN: el tiempo se maneja en segundos
